@@ -1,0 +1,9 @@
+{
+  "id": "drop-terminal",
+  "name": "Drop Terminal",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "A minimal, customizable Quake-style terminal that slides up from the bottom on a hotkey. Runs shell commands plus Obsidian-aware built-in commands.",
+  "author": "k.wendt",
+  "isDesktopOnly": true
+}
