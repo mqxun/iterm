@@ -1,26 +1,29 @@
 /* Drop Terminal — Quake-style drop-down panel. */
 
 .drop-terminal-overlay {
-  --drop-terminal-height: 40vh;
+  --drop-terminal-height: 35vh;
+  --drop-terminal-width: 35vw;
+  --drop-terminal-gap: 24px;
   --drop-terminal-anim: 220ms;
   --drop-terminal-bg: #1a1b26;
 
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  bottom: var(--drop-terminal-gap);
+  width: var(--drop-terminal-width);
   height: var(--drop-terminal-height);
   z-index: var(--layer-modal, 100);
 
-  /* Hidden state: slid fully below the bottom edge. */
-  transform: translateY(100%);
+  /* Hidden state: slid fully below the bottom edge (clearing the gap + shadow). */
+  transform: translateX(-50%)
+    translateY(calc(100% + var(--drop-terminal-gap) + 32px));
   transition: transform var(--drop-terminal-anim) cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   will-change: transform;
 }
 
 .drop-terminal-overlay.is-visible {
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
@@ -29,9 +32,9 @@
   box-sizing: border-box;
   padding: 8px 10px;
   background: var(--drop-terminal-bg);
-  border-top: 1px solid var(--background-modifier-border, #2a2b3c);
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--background-modifier-border, #2a2b3c);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
 

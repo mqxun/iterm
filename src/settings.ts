@@ -4,6 +4,8 @@ import type DropTerminalPlugin from "./main";
 export interface DropTerminalSettings {
   /** Panel height as a percentage of the window height. */
   heightPercent: number;
+  /** Panel width as a percentage of the window width. */
+  widthPercent: number;
   /** Slide animation duration in milliseconds. */
   animationMs: number;
   /** Terminal font family. */
@@ -23,7 +25,8 @@ export interface DropTerminalSettings {
 }
 
 export const DEFAULT_SETTINGS: DropTerminalSettings = {
-  heightPercent: 40,
+  heightPercent: 35,
+  widthPercent: 35,
   animationMs: 220,
   fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Courier New", monospace',
   fontSize: 13,
@@ -63,6 +66,21 @@ export class DropTerminalSettingTab extends PluginSettingTab {
           .setDynamicTooltip()
           .onChange(async (v) => {
             this.plugin.settings.heightPercent = v;
+            await this.plugin.saveSettings();
+            this.plugin.applyAppearance();
+          })
+      );
+
+    new Setting(containerEl)
+      .setName("Panel width")
+      .setDesc("Width of the drop-down as a percentage of the window.")
+      .addSlider((s) =>
+        s
+          .setLimits(20, 90, 5)
+          .setValue(this.plugin.settings.widthPercent)
+          .setDynamicTooltip()
+          .onChange(async (v) => {
+            this.plugin.settings.widthPercent = v;
             await this.plugin.saveSettings();
             this.plugin.applyAppearance();
           })

@@ -60,6 +60,10 @@ export class TerminalOverlay {
       `${this.settings.heightPercent}vh`
     );
     this.el.style.setProperty(
+      "--drop-terminal-width",
+      `${this.settings.widthPercent}vw`
+    );
+    this.el.style.setProperty(
       "--drop-terminal-anim",
       `${this.settings.animationMs}ms`
     );
